@@ -11,24 +11,24 @@ forecast_handler <- list(
       return(http_400())
     }
 
-    request_body  <- NULL
-    response_body <- NULL
-
-    tryCatch({
-      request_body <- get_request_body(request)
+    request_body <- tryCatch({
+      get_request_body(request)
     }, error = function(e) {
-      cat("Could not parse body\n")
-    })
+      return(NULL)
+      }
+    )
 
     if (is.null(request_body)) {
       return(http_400())
     }
 
     # Make forecast
-    tryCatch({
-      forecast_result <- forecast(request_body)
-      response_body   <- jsonlite::toJSON(list(forecast = forecast_result))
-    })
+    response_body <- tryCatch({
+      jsonlite::toJSON(list(forecast = forecast(request_body)))
+    }, error = function(e) {
+      return(NULL)
+      }
+    )
 
     if (is.null(response_body)) {
       return(http_400())
