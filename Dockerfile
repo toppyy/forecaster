@@ -10,7 +10,7 @@ RUN apt-get update \
          libssl-dev \
          curl
 
-RUN Rscript -e "install.packages(c('httpuv','forecast'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN Rscript -e "install.packages(c('httpuv','forecast','jsonlite'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
 WORKDIR /usr/forecaster
 
