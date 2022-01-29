@@ -1,5 +1,3 @@
-cat("Sourced!\n")
-
 http_404 <- list(
   status = 404,
   body = "404 Not Found"

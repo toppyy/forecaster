@@ -38,7 +38,6 @@ router <- function (routes, request) {
 app <- list(
   call = function(request) {
     cat(paste0("\nRequest to ", request$PATH_INFO, "\n"))
-    source_("./R/routing/") # Hot load
 
     response <- router(routes, request)
 
