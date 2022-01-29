@@ -19,3 +19,14 @@ create_response <- function(
     }
     response
 }
+
+
+# Convenience wrappers for some usual HTTP-responses
+
+http_400 <- function() {
+  create_response(list(body = "400 Invalid request"), status = 400)
+}
+
+http_404 <- function() {
+  create_response(list(body = "404 Not Found"), status = 404)
+}

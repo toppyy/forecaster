@@ -1,16 +1,15 @@
-http_404 <- list(
-  status = 404,
-  body = "404 Not Found"
-)
 
 root_handler <- list(
   GET = function(request) list(body = "Hello!!")
 )
 
-
-
 forecast_handler <- list(
   POST = function(request) {
+
+    if (request[["CONTENT_TYPE"]] != "application/json") {
+      print(request[["CONTENT_TYPE"]])
+      return(http_400())
+    }
 
     request_body  <- NULL
     response_body <- NULL
@@ -22,7 +21,7 @@ forecast_handler <- list(
     })
 
     if (is.null(request_body)) {
-      return(create_response(list(body = "Invalid request"), status = 400))
+      return(http_400())
     }
 
     # Make forecast
@@ -32,7 +31,7 @@ forecast_handler <- list(
     })
 
     if (is.null(response_body)) {
-      return(create_response(list(body = "Invalid request"), status = 400))
+      return(http_400())
     }
 
     create_response(

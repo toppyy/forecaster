@@ -26,7 +26,7 @@ source_("./R/domain/")
 
 router <- function (routes, request) {
   if (!request$PATH_INFO %in% names(routes)) {
-    return(http_404)
+    return(http_404())
   }
   path_handler <- routes[[request$PATH_INFO]]
 
