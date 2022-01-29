@@ -1,0 +1,11 @@
+version: '3.5' 
+
+services: 
+
+    forecaster-ubuntu: 
+      build: . 
+      volumes: 
+        - ./R:/usr/forecaster/R
+      container_name: forecaster
+      ports:
+        - 3000:80
