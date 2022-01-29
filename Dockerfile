@@ -16,5 +16,6 @@ WORKDIR /usr/forecaster
 
 ENV LC_ALL=C.UTF-8 
 
+COPY . .
 
 CMD Rscript ./R/server.R $PORT 
