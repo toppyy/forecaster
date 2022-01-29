@@ -3,13 +3,13 @@ args = commandArgs(trailingOnly=TRUE)
 
 # Libraries and helpers
 library(httpuv)
-library(forecast)
+
 source_  <- function(path) {
     invisible(sapply(list.files(path, full.names = TRUE), source))
 }
 
-# Get PORT from arguments or default to 80
-PORT <- 80
+# Get PORT from arguments or use default
+PORT <- 3000
 
 if (length(args) > 0) {
   PORT <- as.integer(args[1])
@@ -19,6 +19,7 @@ if (length(args) > 0) {
 # Source other code
 source_("./R/utils/")
 source_("./R/routing/")
+source_("./R/domain/")
 
 
 
@@ -36,7 +37,8 @@ router <- function (routes, request) {
 
 app <- list(
   call = function(request) {
-    cat(paste0("Request to ", request$PATH_INFO, "\n"))
+    cat(paste0("\nRequest to ", request$PATH_INFO, "\n"))
+    source_("./R/routing/") # Hot load
 
     response <- router(routes, request)
 
