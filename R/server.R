@@ -1,10 +1,19 @@
+#!/usr/bin/env Rscript
+args = commandArgs(trailingOnly=TRUE)
+
+# Libraries and helpers
 library(httpuv)
-
-PORT <- 80
-
 source_  <- function(path) {
     invisible(sapply(list.files(path, full.names = TRUE), source))
 }
+
+# Get PORT from arguments or default to 80
+PORT <- 80
+
+if (length(args) > 0) {
+  PORT <- as.integer(args[1])
+}
+
 
 # Source all the utilities functions
 source_("./R/utils/")
