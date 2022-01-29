@@ -6,9 +6,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update \
         && apt-get install -y \
          r-base \
-         r-base-dev
-
-RUN apt-get install libssl-dev
+         r-base-dev \
+         libssl-dev \
+         curl
 
 RUN Rscript -e "install.packages(c('httpuv','forecast'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
