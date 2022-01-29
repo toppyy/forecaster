@@ -3,6 +3,7 @@ args = commandArgs(trailingOnly=TRUE)
 
 # Libraries and helpers
 library(httpuv)
+library(forecast)
 source_  <- function(path) {
     invisible(sapply(list.files(path, full.names = TRUE), source))
 }
@@ -15,9 +16,10 @@ if (length(args) > 0) {
 }
 
 
-# Source all the utilities functions
+# Source other code
 source_("./R/utils/")
-invisible(source("./R/routing.R"))
+source_("./R/routing/")
+
 
 
 
