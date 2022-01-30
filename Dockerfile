@@ -8,7 +8,7 @@ RUN apt-get update \
          r-base \
          r-base-dev \
          libssl-dev \
-         curl
+         libcurl4-openssl-dev
 
 RUN Rscript -e "install.packages(c('httpuv','forecast','jsonlite'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
