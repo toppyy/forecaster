@@ -6,7 +6,7 @@
 forecast <- function(timeserie, ...) {
 
 
-    fcast <- forecast::forecast(timeserie, ...)
+    fcast <- forecastlight::forecast(timeserie, ...)
 
     attributes <- c(
                     "mean",

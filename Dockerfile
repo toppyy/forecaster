@@ -10,7 +10,10 @@ RUN apt-get update \
          libssl-dev \
          libcurl4-openssl-dev
 
-RUN Rscript -e "install.packages(c('httpuv','forecast','jsonlite'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN Rscript -e "install.packages(c('httpuv','remotes','jsonlite','lmtest'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+
+RUN Rscript -e "remotes::install_github('toppyy/forecastlight')"
+
 
 WORKDIR /usr/forecaster
 

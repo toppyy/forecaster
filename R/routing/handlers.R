@@ -6,6 +6,7 @@ root_handler <- list(
 forecast_handler <- list(
   POST = function(request) {
 
+
     if (request[["CONTENT_TYPE"]] != "application/json") {
       print(request[["CONTENT_TYPE"]])
       return(http_400())
@@ -14,6 +15,8 @@ forecast_handler <- list(
     request_body <- tryCatch({
       get_request_body(request)
     }, error = function(e) {
+      print("Error with parsing request body: ")
+      print(e)
       return(NULL)
       }
     )
@@ -26,6 +29,8 @@ forecast_handler <- list(
     response_body <- tryCatch({
       jsonlite::toJSON(list(forecast = forecast(request_body)))
     }, error = function(e) {
+      print("Error with forecasting: ")
+      print(e)
       return(NULL)
       }
     )
