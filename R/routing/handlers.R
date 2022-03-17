@@ -25,9 +25,13 @@ forecast_handler <- list(
       return(http_400())
     }
 
+    timeserie <- request_body[["data"]]
+    # Default forecast horizon is 2
+    h <- ifelse(is.null(request_body[["h"]]), 2, request_body[["h"]])
+
     # Make forecast
     response_body <- tryCatch({
-      jsonlite::toJSON(list(forecast = forecast(request_body)))
+      jsonlite::toJSON(list(forecast = forecast(timeserie, h = h)))
     }, error = function(e) {
       print("Error with forecasting: ")
       print(e)

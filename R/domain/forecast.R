@@ -1,10 +1,9 @@
 
 # Takes a time serie and returns a forecast for it
 # timeserie = a numeric vector
-# ... = addition arguments to forecast::forecast
+# ... = addition arguments to forecastlight::forecast
 
 forecast <- function(timeserie, ...) {
-
 
     fcast <- forecastlight::forecast(timeserie, ...)
 
@@ -16,11 +15,12 @@ forecast <- function(timeserie, ...) {
                     "lower",
                     "fitted",
                     "method",
-                    "series",
                     "residuals"
                     )
 
-    rtrn <- fcast[attributes]
+    rtrn   <- fcast[attributes]
+    # Add forecast horizon
+    rtrn$h <- length(rtrn[["mean"]])
 
     # Add a couple measures for fit from model
     # ("model" cannot be serialised to JSON entirely)
